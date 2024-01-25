@@ -2,10 +2,17 @@ namespace Helpers.FileHelper
 {
     public class FileHelper
     {
-        public string[] GetStringArrayFromFile(string filePathway)
+        static public string[] GetStringArrayFromFile(string filePathway)
         {
-            Console.WriteLine(filePathway);
-            return new string[] {"",""};
+            try
+            {
+                return File.ReadAllLines(filePathway);;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                throw new Exception();
+            }
         }
     }
 }
