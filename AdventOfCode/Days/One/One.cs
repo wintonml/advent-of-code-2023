@@ -8,20 +8,20 @@ namespace Days.One
 
         public int Solve()
         {
-            string firstNum;
-            string lastNum;
+            char firstNum;
+            char lastNum;
             string combinedNum;
             int sum = 0;
             foreach(string line in _input)
             {
                 MatchCollection matches = Regex.Matches(line, @"\d+");
                 var matchesSize = matches.Count;
-
                 if (matchesSize > 0)
                 {
-                    firstNum = matches[0].Value.ToString();
-                    lastNum = matches[matchesSize - 1].Value.ToString();
-                    combinedNum = firstNum + lastNum;
+                    string combinedValues = string.Join(", ", matches.Cast<Match>().Select(match => match.Value));
+                    firstNum = combinedValues.FirstOrDefault();
+                    lastNum = combinedValues.LastOrDefault();
+                    combinedNum = firstNum.ToString() + lastNum.ToString();
                     sum += int.Parse(combinedNum);
                 }
             }
