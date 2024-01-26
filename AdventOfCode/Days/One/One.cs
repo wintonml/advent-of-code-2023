@@ -1,12 +1,11 @@
 using System.Text.RegularExpressions;
+using AdventOfCode;
 
 namespace Days.One
 {
-    public class DayOne(string[] input)
+    public class DayOne(string fileName, bool isTest) : DayBase(fileName, isTest)
     {
-        private readonly string[] _input = input;
-
-        public int Solve()
+        public override int PartOneSolver()
         {
             char firstNum;
             char lastNum;
@@ -27,6 +26,11 @@ namespace Days.One
             }
 
             return sum;
+        }
+
+        public override int PartTwoSolver()
+        {
+            return 1;
         }
     }
 }
