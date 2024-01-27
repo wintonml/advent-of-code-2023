@@ -7,8 +7,7 @@ public class DayOneExampleTest
     [Fact]
     public void DayOneExampleResult()
     {
-        const string fileName = "DayOneExampleInput";
-        var solver = new DayOne(fileName, true);
+        var solver = new DayOne(nameof(DayOne).ToString(), true);
         var result = solver.PartOneSolver();
 
         Assert.Equal(142, result);

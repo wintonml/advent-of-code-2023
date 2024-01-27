@@ -3,15 +3,16 @@ using AdventOfCode;
 
 namespace Days.One
 {
-    public class DayOne(string fileName, bool isTest) : DayBase(fileName, isTest)
+    public class DayOne(string dayAndNumber, bool isTest) : DayBase(dayAndNumber, isTest)
     {
         public override int PartOneSolver()
         {
+            GetAndSetFileInputToStringArray(true);
             char firstNum;
             char lastNum;
             string combinedNum;
             int sum = 0;
-            foreach(string line in _input)
+            foreach(string line in this.Input)
             {
                 MatchCollection matches = Regex.Matches(line, @"\d+");
                 var matchesSize = matches.Count;

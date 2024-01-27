@@ -6,8 +6,7 @@ namespace Program
     {
         static void Main()
         {
-            const string fileName = "DayOneInput";
-            var solver = new DayOne(fileName, false);
+            var solver = new DayOne(nameof(DayOne).ToString(), false);
 
             Console.WriteLine("Day One answer is: " + solver.PartOneSolver());
         }
