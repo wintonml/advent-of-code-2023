@@ -18,23 +18,29 @@ namespace Days.One
             eight,
             nine
         }
-        private string firstVal = "";
-        private string lastVal = "";
-        private string combinedNum = string.Empty;
+        private string firstValue = "";
+        private string lastValue = "";
+        private string combinedNumber = string.Empty;
         private int sum = 0;
 
         public override int PartOneSolver()
         {
-            GetAndSetFileInputToStringArray(isPartOne: true);
             Regex regex = new(@"\d");
 
-            return GetTotalValue(regex);
+            try
+            {
+                return GetTotalValue(regex);
+            }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine($"An exception occurred: {ex.Message}");
+                throw new ApplicationException("An error occurred while accessing SomeProperty.", ex);
+            }
         }
 
         public override int PartTwoSolver()
         {
-            GetAndSetFileInputToStringArray(isPartOne: false);
-            string pattern = @"(?:(\d|" + string.Join("|", Enum.GetNames(typeof(Numbers)).Select(Regex.Escape)) + "))";
+            string pattern = @"\d|(?=(" + string.Join("|", Enum.GetNames(typeof(Numbers)).Select(Regex.Escape)) + "))";
 
             Regex regex = new(pattern, RegexOptions.IgnoreCase);
 
@@ -49,34 +55,36 @@ namespace Days.One
                 var matchesSize = matches.Count;
                 if (matchesSize > 0)
                 {
-                    firstVal = matches[0].ToString();
-                    lastVal = matches[matchesSize - 1].ToString();
-
-                    firstVal = IsStringAnIntValue(firstVal) ?
-                                firstVal :
-                                GetNumbersEnumIntValueAsString(firstVal);
-
-                    lastVal = IsStringAnIntValue(lastVal) ?
-                                lastVal :
-                                GetNumbersEnumIntValueAsString(lastVal) ;
+                    firstValue = GetValue(matches[0]);
+                    lastValue = GetValue(matches[matchesSize - 1]);
                 }
 
-                combinedNum = firstVal + lastVal;
-                sum += int.Parse(combinedNum);
+                combinedNumber = firstValue + lastValue;
+                sum += int.Parse(combinedNumber);
             }
 
             return sum;
+        }
+
+        private static string GetValue(Match value)
+        {
+            var stringValue = value.ToString();
+            if(string.IsNullOrEmpty(stringValue))
+            {
+                var groupSize = value.Groups.Count;
+                var wordValue = value.Groups[groupSize - 1].Value.ToString();
+                return GetNumbersEnumIntValueAsString(wordValue);
+            }
+            else
+            {
+                return stringValue;
+            }
         }
 
         private static string GetNumbersEnumIntValueAsString(string value)
         {
             Enum.TryParse(value, true, out Numbers num);
             return ((int)num).ToString();
-        }
-
-        private static bool IsStringAnIntValue(string value)
-        {
-            return int.TryParse(value, out _);
         }
     }
 }

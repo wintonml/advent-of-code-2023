@@ -6,7 +6,7 @@ public abstract class DayBase(string dayAndNumber, bool isTest)
 {
     public string _dayAndNumber  = dayAndNumber;
     public readonly bool _isTest = isTest;
-    public string[] Input { get; set; }
+    public string[]? Input { get; set; }
 
     public abstract int PartOneSolver();
     public abstract int PartTwoSolver();
