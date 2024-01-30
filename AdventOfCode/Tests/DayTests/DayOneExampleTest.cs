@@ -29,11 +29,11 @@ public class DayOneExampleTest
     {
         var solver = new DayOne(nameof(DayOne).ToString(), isTest: true)
         {
-            Input = ["twone", "12three5eightwo"] // return 21 +12 = 33
+            Input = ["twone", "12three5eighthree"] // return 21 +13 = 34
         };
         var result = solver.PartTwoSolver();
 
-        Assert.Equal(33, result);
+        Assert.Equal(34, result);
     }
 
     [Fact]
@@ -66,6 +66,18 @@ public class DayOneExampleTest
         var solver = new DayOne(nameof(DayOne).ToString(), isTest: true)
         {
             Input = ["oneightwo"]
+        };
+        var result = solver.PartTwoSolver();
+
+        Assert.Equal(12, result);
+    }
+
+    [Fact]
+    public void DayOnePartTwoInputLineHasNoNumbers()
+    {
+        var solver = new DayOne(nameof(DayOne).ToString(), isTest: true)
+        {
+            Input = ["oneightwo", "asdasdnjkvsjknd"]
         };
         var result = solver.PartTwoSolver();
 

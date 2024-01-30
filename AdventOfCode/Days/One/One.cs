@@ -51,6 +51,9 @@ namespace Days.One
         {
             foreach(string line in Input)
             {
+                firstValue = "0";
+                lastValue = "0";
+
                 MatchCollection matches = regex.Matches(line);
                 var matchesSize = matches.Count;
                 if (matchesSize > 0)
