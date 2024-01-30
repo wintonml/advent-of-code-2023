@@ -2,11 +2,11 @@ namespace Helpers.FileHelper
 {
     public class FileHelper
     {
-        static public string[] GetStringArrayFromFile(string filePathway)
+        static public string[] GetStringArrayFromFile(string fileDirectory)
         {
             try
             {
-                return File.ReadAllLines(filePathway);;
+                return File.ReadAllLines(fileDirectory);
             }
             catch (Exception ex)
             {

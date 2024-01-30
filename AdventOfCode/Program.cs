@@ -1,5 +1,4 @@
 ﻿using Days.One;
-using Helpers.FileHelper;
 
 namespace Program
 {
@@ -7,11 +6,13 @@ namespace Program
     {
         static void Main()
         {
-            const string fileDirectory = "Inputs/Puzzles/DayOneInput.txt";
-            var input = FileHelper.GetStringArrayFromFile(fileDirectory);
-            var solver = new DayOne(input);
+            var solver = new DayOne(nameof(DayOne).ToString(), false);
 
-            Console.WriteLine("Day One answer is: " + solver.Solve());
+            solver.GetAndSetFileInputToStringArray(isPartOne: true);
+            Console.WriteLine("Day One Part One answer is: " + solver.PartOneSolver());
+
+            solver.GetAndSetFileInputToStringArray(isPartOne: false);
+            Console.WriteLine("Day One Part Two answer is: " + solver.PartTwoSolver());
         }
     }
 }

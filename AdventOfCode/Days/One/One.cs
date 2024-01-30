@@ -1,32 +1,93 @@
 using System.Text.RegularExpressions;
+using AdventOfCode;
 
 namespace Days.One
 {
-    public class DayOne(string[] input)
+    public class DayOne(string dayAndNumber, bool isTest) : DayBase(dayAndNumber, isTest)
     {
-        private readonly string[] _input = input;
-
-        public int Solve()
+        private enum Numbers
         {
-            char firstNum;
-            char lastNum;
-            string combinedNum;
-            int sum = 0;
-            foreach(string line in _input)
+            zero,
+            one,
+            two,
+            three,
+            four,
+            five,
+            six,
+            seven,
+            eight,
+            nine
+        }
+        private string firstValue = "";
+        private string lastValue = "";
+        private string combinedNumber = string.Empty;
+        private int sum = 0;
+
+        public override int PartOneSolver()
+        {
+            Regex regex = new(@"\d");
+
+            try
             {
-                MatchCollection matches = Regex.Matches(line, @"\d+");
+                return GetTotalValue(regex);
+            }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine($"An exception occurred: {ex.Message}");
+                throw new ApplicationException("An error occurred while accessing SomeProperty.", ex);
+            }
+        }
+
+        public override int PartTwoSolver()
+        {
+            string pattern = @"\d|(?=(" + string.Join("|", Enum.GetNames(typeof(Numbers)).Select(Regex.Escape)) + "))";
+
+            Regex regex = new(pattern, RegexOptions.IgnoreCase);
+
+            return GetTotalValue(regex);
+        }
+
+        private int GetTotalValue(Regex regex)
+        {
+            foreach(string line in Input)
+            {
+                firstValue = "0";
+                lastValue = "0";
+
+                MatchCollection matches = regex.Matches(line);
                 var matchesSize = matches.Count;
                 if (matchesSize > 0)
                 {
-                    string combinedValues = string.Join(", ", matches.Cast<Match>().Select(match => match.Value));
-                    firstNum = combinedValues.FirstOrDefault();
-                    lastNum = combinedValues.LastOrDefault();
-                    combinedNum = firstNum.ToString() + lastNum.ToString();
-                    sum += int.Parse(combinedNum);
+                    firstValue = GetValue(matches[0]);
+                    lastValue = GetValue(matches[matchesSize - 1]);
                 }
+
+                combinedNumber = firstValue + lastValue;
+                sum += int.Parse(combinedNumber);
             }
 
             return sum;
+        }
+
+        private static string GetValue(Match value)
+        {
+            var stringValue = value.ToString();
+            if(string.IsNullOrEmpty(stringValue))
+            {
+                var groupSize = value.Groups.Count;
+                var wordValue = value.Groups[groupSize - 1].Value.ToString();
+                return GetNumbersEnumIntValueAsString(wordValue);
+            }
+            else
+            {
+                return stringValue;
+            }
+        }
+
+        private static string GetNumbersEnumIntValueAsString(string value)
+        {
+            Enum.TryParse(value, true, out Numbers num);
+            return ((int)num).ToString();
         }
     }
 }
