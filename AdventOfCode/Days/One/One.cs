@@ -3,7 +3,7 @@ using AdventOfCode;
 
 namespace Days.One
 {
-    public class DayOne(string dayAndNumber, bool isTest) : DayBase(dayAndNumber, isTest)
+    public class DayOne() : DayBase
     {
         private enum Numbers
         {
@@ -25,6 +25,7 @@ namespace Days.One
 
         public override int PartOneSolver()
         {
+            sum = 0;
             Regex regex = new(@"\d");
 
             try
@@ -40,6 +41,7 @@ namespace Days.One
 
         public override int PartTwoSolver()
         {
+            sum = 0;
             string pattern = @"\d|(?=(" + string.Join("|", Enum.GetNames(typeof(Numbers)).Select(Regex.Escape)) + "))";
 
             Regex regex = new(pattern, RegexOptions.IgnoreCase);
