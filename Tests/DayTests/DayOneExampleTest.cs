@@ -15,7 +15,6 @@ namespace Tests.DayTests
         public void DayOnePartOneExampleResult()
         {
             var solver = new DayOne();
-            Console.WriteLine(DayOnePartOneTestFile);
             solver.SetInputUsingFileDirectory(DayOnePartOneTestFile);
             var result = solver.PartOneSolver();
 
