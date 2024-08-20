@@ -1,4 +1,4 @@
-namespace Helpers.FileHelper
+namespace AdventOfCode.Helpers
 {
     public class FileHelper
     {
@@ -18,9 +18,9 @@ namespace Helpers.FileHelper
         static public string ConstructFileDirectory(bool isAccessingFromTest, bool isTest, bool isPartOne, string dayNumber)
         {
             string section = isPartOne ? "PartOne" : "PartTwo";
-            string prefix = isAccessingFromTest ? "../../../../" : string.Empty;
+            string prefix = isAccessingFromTest ? "../../../../AdventOfCode/" : string.Empty;
             string fileDirectory;
-            if(isTest)
+            if (isTest)
             {
                 fileDirectory = $"{prefix}Inputs/Examples/{dayNumber}/{dayNumber}{section}ExampleInput.txt";
             }
