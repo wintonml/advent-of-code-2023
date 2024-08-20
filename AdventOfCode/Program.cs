@@ -1,5 +1,5 @@
-﻿using Days.One;
-using Helpers.FileHelper;
+﻿using AdventOfCode.Days.One;
+using AdventOfCode.Helpers;
 
 namespace Program
 {

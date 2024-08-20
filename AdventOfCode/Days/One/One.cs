@@ -1,9 +1,8 @@
 using System.Text.RegularExpressions;
-using AdventOfCode;
 
-namespace Days.One
+namespace AdventOfCode.Days.One
 {
-    public class DayOne() : DayBase
+    public class DayOne() : DayBase.DayBase
     {
         private enum Numbers
         {
@@ -51,7 +50,12 @@ namespace Days.One
 
         private int GetTotalValue(Regex regex)
         {
-            foreach(string line in Input)
+            if (Input == null)
+            {
+                throw new Exception("Input is null");
+            }
+
+            foreach (string line in Input)
             {
                 firstValue = "0";
                 lastValue = "0";
@@ -74,7 +78,7 @@ namespace Days.One
         private static string GetValue(Match value)
         {
             var stringValue = value.ToString();
-            if(string.IsNullOrEmpty(stringValue))
+            if (string.IsNullOrEmpty(stringValue))
             {
                 var groupSize = value.Groups.Count;
                 var wordValue = value.Groups[groupSize - 1].Value.ToString();

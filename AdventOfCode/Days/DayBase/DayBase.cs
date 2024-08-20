@@ -1,23 +1,24 @@
-﻿using Helpers.FileHelper;
+﻿using AdventOfCode.Helpers;
 
-namespace AdventOfCode;
-
-public abstract class DayBase()
+namespace AdventOfCode.Days.DayBase
 {
-    protected string[]? Input { get; set; }
-
-    public abstract int PartOneSolver();
-    public abstract int PartTwoSolver();
-    public void SetInputUsingFileDirectory(string fileDirectory)
+    public abstract class DayBase()
     {
-        if(!string.IsNullOrEmpty(fileDirectory))
+        protected string[]? Input { get; set; }
+
+        public abstract int PartOneSolver();
+        public abstract int PartTwoSolver();
+        public void SetInputUsingFileDirectory(string fileDirectory)
         {
-            Input = FileHelper.GetStringArrayFromFile(fileDirectory);
+            if (!string.IsNullOrEmpty(fileDirectory))
+            {
+                Input = FileHelper.GetStringArrayFromFile(fileDirectory);
+            }
         }
-    }
 
-    public void SetInput(string[] input)
-    {
-        Input = input;
+        public void SetInput(string[] input)
+        {
+            Input = input;
+        }
     }
 }
