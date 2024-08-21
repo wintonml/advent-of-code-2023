@@ -21,16 +21,144 @@ namespace Tests.DayTests
             Assert.Equal(4361, result);
         }
 
-        #region Day Three Answers
-        // [Fact]
-        // public void DayThreePartOneAnswer()
-        // {
-        //     var solver = new DayThree();
-        //     solver.SetInputUsingFileDirectory(DayThreePartOneRealFile);
-        //     var result = solver.PartOneSolver();
+        [Fact]
+        public void DayThreePartOneDigitTopLeft()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "1..",
+                ".*.",
+                "...",
+                ];
 
-        //     Assert.True(false);
-        // }
+            solver.SetInput(input);
+            var result = solver.PartOneSolver();
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void DayThreePartOneDigitTopMiddle()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                ".1.",
+                ".*.",
+                "...",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartOneSolver();
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void DayThreePartOneDigitTopRight()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "..1",
+                ".*.",
+                "...",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartOneSolver();
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void DayThreePartOneDigitBottomLeft()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "...",
+                ".*.",
+                "1..",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartOneSolver();
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void DayThreePartOneDigitBottomMiddle()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "...",
+                ".*.",
+                ".1.",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartOneSolver();
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void DayThreePartOneDigitBottomRight()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "...",
+                ".*.",
+                "..1",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartOneSolver();
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void DayThreePartOneFullySurrounded()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "111",
+                "1*1",
+                "111",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartOneSolver();
+
+            Assert.Equal(224, result);
+        }
+
+        [Fact]
+        public void DayThreePartOneTopLeftAndRight()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "1.1",
+                ".*.",
+                "...",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartOneSolver();
+
+            Assert.Equal(2, result);
+        }
+
+        #region Day Three Answers
+        [Fact]
+        public void DayThreePartOneAnswer()
+        {
+            var solver = new DayThree();
+            solver.SetInputUsingFileDirectory(DayThreePartOneRealFile);
+            var result = solver.PartOneSolver();
+
+            Assert.Equal(560670, result);
+        }
 
         #endregion
     }

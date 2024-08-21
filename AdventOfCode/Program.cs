@@ -30,6 +30,13 @@ namespace AdventOfCode
                 nameof(Days.Two.DayTwo).ToString());
             dayTwoSolver.SetInputUsingFileDirectory(fileDirectory);
             Console.WriteLine("Day Two Part Two answer is: " + dayTwoSolver.PartTwoSolver());
+
+            var dayThreeSolver = new Days.Three.DayThree();
+            fileDirectory = FileHelper.ConstructFileDirectory(
+                isAccessingFromTest: false, isTest: false, isPartOne: true,
+                nameof(Days.Three.DayThree).ToString());
+            dayThreeSolver.SetInputUsingFileDirectory(fileDirectory);
+            Console.WriteLine("Day Three Part One answer is: " + dayThreeSolver.PartOneSolver());
         }
     }
 }

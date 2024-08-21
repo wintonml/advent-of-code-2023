@@ -76,16 +76,18 @@ namespace AdventOfCode.Days.Three
             int start = position;
             int end = position;
 
-            // Find the start of the number
-            while (start > 0 && char.IsDigit(line[start - 1]))
-            {
-                start--;
-            }
+            if(char.IsDigit(line[start])){
+                // Find the start of the number
+                while (start > 0 && char.IsDigit(line[start - 1]))
+                {
+                    start--;
+                }
 
-            // Find the end of the number
-            while (end < line.Length && char.IsDigit(line[end]))
-            {
-                end++;
+                // Find the end of the number
+                while (end < line.Length && char.IsDigit(line[end]))
+                {
+                    end++;
+                }
             }
 
             var numberAsString = line.Substring(start, end - start);
