@@ -12,7 +12,7 @@ namespace Tests.DayTests
         // readonly string DayThreePartTwoRealFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: false, isPartOne: false, Day);
 
         [Fact]
-        public void DayTwoPartOneExampleResult()
+        public void DayThreePartOneExampleResult()
         {
             var solver = new DayThree();
             solver.SetInputUsingFileDirectory(DayThreePartOneTestFile);

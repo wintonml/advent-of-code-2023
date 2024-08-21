@@ -22,9 +22,9 @@ namespace AdventOfCode.Days.Three
                 var rowLength = row.Length;
                 var matches = ignoreNumbersAndFullstops.Matches(row);
 
-                if (matches.Count == 0){ break; }
+                if (matches.Count == 0){ continue; }
 
-                for (int j = 0; i < rowLength ; j++)
+                for (int j = 0; j < rowLength; j++)
                 {
                     var character = row[j];
                     var characterMatches = matches.Cast<Match>().Any(match => match.Value.Contains(character));
@@ -38,47 +38,32 @@ namespace AdventOfCode.Days.Three
                         if (!isTopRow)
                         {
                             var rowIndexAbove = i - 1;
-                            // Check row above
-                            if (!isStartOfLine)
-                            {
-                                // Check left side of character
-                            }
-                            if (!isEndOfLine)
-                            {
-                                // Check right side of character
-                            }
-                            // Check character above
+                            GetAdjacentNumbers(isEndOfLine, isStartOfLine, adjacentNumbers, rowIndexAbove, j);
                         }
 
                         if (!isBottomRow)
                         {
-                            // Check row below
-                            if (!isStartOfLine)
-                            {
-                                // Check left side of character
-                            }
-                            if (!isEndOfLine)
-                            {
-                                // Check right side of character
-                            }
-                            // Check character below
+                            var rowIndexBelow = i + 1;
+                            GetAdjacentNumbers(isEndOfLine, isStartOfLine, adjacentNumbers, rowIndexBelow, j);
                         }
 
                         if(!isStartOfLine)
                         {
-                            // Check left side
+                            var foundNumber = ExtractNumberAtPosition(Input[i], (j - 1));
+                            adjacentNumbers.Add(foundNumber);
                         }
 
                         if(!isEndOfLine)
                         {
-                            // Check right side
+                            var foundNumber = ExtractNumberAtPosition(Input[i], (j + 1));
+                            adjacentNumbers.Add(foundNumber);
                         }
-
                     }
                 }
+                schematicNumbers.Add(adjacentNumbers.Sum());
             }
 
-            return 0;
+            return schematicNumbers.Sum();
         }
 
         public override int PartTwoSolver()
@@ -86,7 +71,7 @@ namespace AdventOfCode.Days.Three
             throw new NotImplementedException();
         }
 
-        public static string ExtractNumberAtPosition(string line, int position)
+        public static int ExtractNumberAtPosition(string line, int position)
         {
             int start = position;
             int end = position;
@@ -103,8 +88,36 @@ namespace AdventOfCode.Days.Three
                 end++;
             }
 
-            // Extract the number substring
-            return line.Substring(start, end - start);
+            var numberAsString = line.Substring(start, end - start);
+            var isSuccessful = int.TryParse(numberAsString, out int number);
+            return isSuccessful ? number : 0;
+        }
+
+        private void GetAdjacentNumbers(bool isEndOfLine, bool isStartOfLine, List<int> adjacentNumbers, int rowIndex, int columnIndex)
+        {
+            if (Input == null)
+            {
+                throw new Exception("Input is null");
+            }
+
+            var row = Input[rowIndex];
+            var foundNumber = ExtractNumberAtPosition(row, columnIndex);
+
+            if (foundNumber == 0)
+            {
+                if (!isStartOfLine)
+                {
+                    adjacentNumbers.Add(ExtractNumberAtPosition(row, (columnIndex - 1)));
+                }
+                if (!isEndOfLine)
+                {
+                    adjacentNumbers.Add(ExtractNumberAtPosition(row, (columnIndex + 1)));
+                }
+            }
+            else
+            {
+                adjacentNumbers.Add(foundNumber);
+            }
         }
     }
 }
