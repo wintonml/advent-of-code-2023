@@ -9,7 +9,7 @@ namespace Tests.DayTests
         readonly string DayThreePartOneTestFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: true, isPartOne: true, Day);
         readonly string DayThreePartOneRealFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: false, isPartOne: true, Day);
         readonly string DayThreePartTwoTestFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: true, isPartOne: false, Day);
-        // readonly string DayThreePartTwoRealFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: false, isPartOne: false, Day);
+        readonly string DayThreePartTwoRealFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: false, isPartOne: false, Day);
 
         [Fact]
         public void DayThreePartOneExampleResult()
@@ -168,6 +168,16 @@ namespace Tests.DayTests
             var result = solver.PartOneSolver();
 
             Assert.Equal(560670, result);
+        }
+
+        [Fact]
+        public void DayThreePartTwoAnswer()
+        {
+            var solver = new DayThree();
+            solver.SetInputUsingFileDirectory(DayThreePartTwoRealFile);
+            var result = solver.PartTwoSolver();
+
+            Assert.True(false);
         }
 
         #endregion
