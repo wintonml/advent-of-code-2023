@@ -8,7 +8,7 @@ namespace Tests.DayTests
         static readonly string Day = nameof(DayThree).ToString();
         readonly string DayThreePartOneTestFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: true, isPartOne: true, Day);
         readonly string DayThreePartOneRealFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: false, isPartOne: true, Day);
-        // readonly string DayThreePartTwoTestFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: true, isPartOne: false, Day);
+        readonly string DayThreePartTwoTestFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: true, isPartOne: false, Day);
         // readonly string DayThreePartTwoRealFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: false, isPartOne: false, Day);
 
         [Fact]
@@ -19,6 +19,16 @@ namespace Tests.DayTests
             var result = solver.PartOneSolver();
 
             Assert.Equal(4361, result);
+        }
+
+        [Fact]
+        public void DayThreePartTwoExampleResult()
+        {
+            var solver = new DayThree();
+            solver.SetInputUsingFileDirectory(DayThreePartTwoTestFile);
+            var result = solver.PartTwoSolver();
+
+            Assert.Equal(467835, result);
         }
 
         [Fact]
