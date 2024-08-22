@@ -59,15 +59,15 @@ namespace Tests.DayTests
         }
 
         #region Day Four Answers
-        // [Fact]
-        // public void DayFourPartOneAnswer()
-        // {
-        //     var solver = new DayFour();
-        //     solver.SetInputUsingFileDirectory(DayFourPartOneRealFile);
-        //     var result = solver.PartOneSolver();
+        [Fact]
+        public void DayFourPartOneAnswer()
+        {
+            var solver = new DayFour();
+            solver.SetInputUsingFileDirectory(DayFourPartOneRealFile);
+            var result = solver.PartOneSolver();
 
-        //     Assert.Equal(0, result);
-        // }32447
+            Assert.Equal(20407, result);
+        }
         #endregion
     }
 }
