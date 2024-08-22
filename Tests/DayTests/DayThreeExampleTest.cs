@@ -159,6 +159,86 @@ namespace Tests.DayTests
             Assert.Equal(2, result);
         }
 
+        [Fact]
+        public void DayThreePartTwoTopLeftAndRight()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "1.1",
+                ".*.",
+                "...",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartTwoSolver();
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void DayThreePartTwoThreeNumbers()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "1.1",
+                ".*.",
+                "10.",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartTwoSolver();
+
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
+        public void DayThreePartTwoNonAsteriskSymbol()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "1.1",
+                ".&.",
+                "...",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartTwoSolver();
+
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
+        public void DayThreePartTwoSymbols()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "1.1.",
+                ".*.*",
+                "...2",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartTwoSolver();
+
+            Assert.Equal(3, result);
+        }
+
+        [Fact]
+        public void DayThreePartTwoSymbolsDifferentLines()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "1*1.",
+                "...*",
+                "...2",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartTwoSolver();
+
+            Assert.Equal(3, result);
+        }
+
         #region Day Three Answers
         [Fact]
         public void DayThreePartOneAnswer()
@@ -177,7 +257,7 @@ namespace Tests.DayTests
             solver.SetInputUsingFileDirectory(DayThreePartTwoRealFile);
             var result = solver.PartTwoSolver();
 
-            Assert.True(false);
+            Assert.Equal(91622824, result);
         }
 
         #endregion

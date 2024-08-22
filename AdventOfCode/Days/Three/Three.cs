@@ -69,7 +69,7 @@ namespace AdventOfCode.Days.Three
         public override int PartTwoSolver()
         {
             var gearRatioTotal= 0;
-            var ignoreNumbersAndFullstops = new Regex(@"\*");
+            var findAsterisks = new Regex(@"\*");
 
             if (Input == null)
             {
@@ -79,15 +79,15 @@ namespace AdventOfCode.Days.Three
 
             for (int i = 0; i < numOfRows; i++)
             {
-                var adjacentNumbers = new List<int>();
                 var row = Input[i];
                 var rowLength = row.Length;
-                var matches = ignoreNumbersAndFullstops.Matches(row);
+                var matches = findAsterisks.Matches(row);
 
                 if (matches.Count == 0){ continue; }
 
                 for (int j = 0; j < rowLength; j++)
                 {
+                    var adjacentNumbers = new List<int>();
                     var character = row[j];
                     var characterMatches = matches.Cast<Match>().Any(match => match.Value.Contains(character));
                     if (characterMatches)
@@ -129,11 +129,12 @@ namespace AdventOfCode.Days.Three
                             }
                             if (adjacentNumbers.Count > 2){ break;}
                         }
+
+                        if (adjacentNumbers.Count == 2)
+                        {
+                            gearRatioTotal += adjacentNumbers[0] * adjacentNumbers[1];
+                        }
                     }
-                }
-                if (adjacentNumbers.Count == 2)
-                {
-                    gearRatioTotal += adjacentNumbers[0] * adjacentNumbers[1];
                 }
             }
 
