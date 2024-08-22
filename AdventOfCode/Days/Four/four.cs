@@ -18,8 +18,8 @@ namespace AdventOfCode.Days.Four
             {
                 var cardNumbers = card.Split(":")[1];
                 var numbers = cardNumbers.Split("|");
-                var winningNumbers = numbers[0].Trim().Split(" ");
-                var lotteryNumbers = numbers[1].Trim().Split(" ");
+                var winningNumbers = numbers[0].Split(" ", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+                var lotteryNumbers = numbers[1].Split(" ", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
                 var totalWinningNumbers = winningNumbers.Intersect(lotteryNumbers).Count();
 
