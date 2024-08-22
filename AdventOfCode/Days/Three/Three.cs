@@ -68,7 +68,77 @@ namespace AdventOfCode.Days.Three
 
         public override int PartTwoSolver()
         {
-            throw new NotImplementedException();
+            var gearRatioTotal= 0;
+            var findAsterisks = new Regex(@"\*");
+
+            if (Input == null)
+            {
+                throw new Exception("Input is null");
+            }
+            var numOfRows = Input.Length;
+
+            for (int i = 0; i < numOfRows; i++)
+            {
+                var row = Input[i];
+                var rowLength = row.Length;
+                var matches = findAsterisks.Matches(row);
+
+                if (matches.Count == 0){ continue; }
+
+                for (int j = 0; j < rowLength; j++)
+                {
+                    var adjacentNumbers = new List<int>();
+                    var character = row[j];
+                    var characterMatches = matches.Cast<Match>().Any(match => match.Value.Contains(character));
+                    if (characterMatches)
+                    {
+                        var isTopRow = i == 0;
+                        var isBottomRow = i == (numOfRows - 1);
+                        var isStartOfLine = j == 0;
+                        var isEndOfLine = j == (rowLength - 1);
+
+                        if (!isTopRow)
+                        {
+                            var rowIndexAbove = i - 1;
+                            GetAdjacentNumbers(isEndOfLine, isStartOfLine, adjacentNumbers, rowIndexAbove, j);
+                        }
+
+                        if (!isBottomRow)
+                        {
+                            var rowIndexBelow = i + 1;
+                            GetAdjacentNumbers(isEndOfLine, isStartOfLine, adjacentNumbers, rowIndexBelow, j);
+                            if (adjacentNumbers.Count > 2){ break;}
+                        }
+
+                        if(!isStartOfLine)
+                        {
+                            var foundNumber = ExtractNumberAtPosition(Input[i], (j - 1));
+                            if (foundNumber != 0)
+                            {
+                                adjacentNumbers.Add(foundNumber);
+                            }
+                            if (adjacentNumbers.Count > 2){ break;}
+                        }
+
+                        if(!isEndOfLine)
+                        {
+                            var foundNumber = ExtractNumberAtPosition(Input[i], (j + 1));
+                            if (foundNumber != 0)
+                            {
+                                adjacentNumbers.Add(foundNumber);
+                            }
+                            if (adjacentNumbers.Count > 2){ break;}
+                        }
+
+                        if (adjacentNumbers.Count == 2)
+                        {
+                            gearRatioTotal += adjacentNumbers[0] * adjacentNumbers[1];
+                        }
+                    }
+                }
+            }
+
+            return gearRatioTotal;
         }
 
         public static int ExtractNumberAtPosition(string line, int position)
@@ -109,11 +179,19 @@ namespace AdventOfCode.Days.Three
             {
                 if (!isStartOfLine)
                 {
-                    adjacentNumbers.Add(ExtractNumberAtPosition(row, (columnIndex - 1)));
+                    var num = ExtractNumberAtPosition(row, (columnIndex - 1));
+                    if (num != 0)
+                    {
+                        adjacentNumbers.Add(num);
+                    }
                 }
                 if (!isEndOfLine)
                 {
-                    adjacentNumbers.Add(ExtractNumberAtPosition(row, (columnIndex + 1)));
+                    var num = ExtractNumberAtPosition(row, (columnIndex + 1));
+                    if (num != 0)
+                    {
+                        adjacentNumbers.Add(num);
+                    }
                 }
             }
             else

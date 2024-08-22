@@ -8,8 +8,8 @@ namespace Tests.DayTests
         static readonly string Day = nameof(DayThree).ToString();
         readonly string DayThreePartOneTestFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: true, isPartOne: true, Day);
         readonly string DayThreePartOneRealFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: false, isPartOne: true, Day);
-        // readonly string DayThreePartTwoTestFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: true, isPartOne: false, Day);
-        // readonly string DayThreePartTwoRealFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: false, isPartOne: false, Day);
+        readonly string DayThreePartTwoTestFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: true, isPartOne: false, Day);
+        readonly string DayThreePartTwoRealFile = FileHelper.ConstructFileDirectory(isAccessingFromTest: true, isTest: false, isPartOne: false, Day);
 
         [Fact]
         public void DayThreePartOneExampleResult()
@@ -19,6 +19,16 @@ namespace Tests.DayTests
             var result = solver.PartOneSolver();
 
             Assert.Equal(4361, result);
+        }
+
+        [Fact]
+        public void DayThreePartTwoExampleResult()
+        {
+            var solver = new DayThree();
+            solver.SetInputUsingFileDirectory(DayThreePartTwoTestFile);
+            var result = solver.PartTwoSolver();
+
+            Assert.Equal(467835, result);
         }
 
         [Fact]
@@ -149,6 +159,86 @@ namespace Tests.DayTests
             Assert.Equal(2, result);
         }
 
+        [Fact]
+        public void DayThreePartTwoTopLeftAndRight()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "1.1",
+                ".*.",
+                "...",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartTwoSolver();
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void DayThreePartTwoThreeNumbers()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "1.1",
+                ".*.",
+                "10.",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartTwoSolver();
+
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
+        public void DayThreePartTwoNonAsteriskSymbol()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "1.1",
+                ".&.",
+                "...",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartTwoSolver();
+
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
+        public void DayThreePartTwoSymbols()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "1.1.",
+                ".*.*",
+                "...2",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartTwoSolver();
+
+            Assert.Equal(3, result);
+        }
+
+        [Fact]
+        public void DayThreePartTwoSymbolsDifferentLines()
+        {
+            var solver = new DayThree();
+            string[] input = [
+                "1*1.",
+                "...*",
+                "...2",
+                ];
+
+            solver.SetInput(input);
+            var result = solver.PartTwoSolver();
+
+            Assert.Equal(3, result);
+        }
+
         #region Day Three Answers
         [Fact]
         public void DayThreePartOneAnswer()
@@ -158,6 +248,16 @@ namespace Tests.DayTests
             var result = solver.PartOneSolver();
 
             Assert.Equal(560670, result);
+        }
+
+        [Fact]
+        public void DayThreePartTwoAnswer()
+        {
+            var solver = new DayThree();
+            solver.SetInputUsingFileDirectory(DayThreePartTwoRealFile);
+            var result = solver.PartTwoSolver();
+
+            Assert.Equal(91622824, result);
         }
 
         #endregion
